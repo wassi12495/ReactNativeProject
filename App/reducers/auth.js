@@ -1,13 +1,16 @@
 import { TEST } from "../actions/types";
 
 const initialState = {
-  currentUser: {}
+  currentUser: ""
 };
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case TEST:
-      return state;
+      return {
+        ...state,
+        currentUser: action.data
+      };
     default:
       return state;
   }

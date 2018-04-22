@@ -1,9 +1,21 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import {connect} from 'react-redux'
+import * as actions from '../../actions'
+import { Text, View, TextInput } from "react-native";
 
 class About extends Component {
   constructor() {
     super();
+    this.state={
+      text: "hi"
+    }
+  }
+
+  changeText = (text) =>{
+    this.props.test(text)
+    this.state({
+      text
+    })
   }
 
   render() {
@@ -13,9 +25,14 @@ class About extends Component {
         <Text>
           I'm not quite sure what to put here yet. But, I am pretty excited!
         </Text>
+        <TextInput onChangeText= {(text) => this.props.test(text)} value={this.state.text}/>
+        <Text>{this.props.auth.currentUser}</Text>
       </View>
     );
   }
 }
 
-export default About;
+const mapStateToProps= ({auth})=>({
+  auth: auth
+})
+export default connect(mapStateToProps, actions)(About);
